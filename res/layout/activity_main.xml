@@ -7,9 +7,9 @@
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnWidth="150dp"
+        android:columnWidth="130dp"
         android:numColumns="auto_fit"
-        android:stretchMode="spacingWidthUniform" />
+        android:stretchMode="columnWidth" />
 
     <ProgressBar
         android:layout_gravity="center"
