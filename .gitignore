@@ -1,8 +1,17 @@
-
-#ignore thumbnails created by windows
-Thumbs.db
-
-#Ignore files build by Eclipse Android
 bin
 gen
-proguard
+*.apk
+.hg/
+local.properties
+*.DS_Store
+*.BridgeSort
+out/
+tmp/
+build/
+.gradle/
+.idea/
+*.iml
+.project
+.classpath
+app/src/main/res/values/com_crashlytics_export_strings.xml
+*.pem
