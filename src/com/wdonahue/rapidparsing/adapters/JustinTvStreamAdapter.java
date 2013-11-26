@@ -36,6 +36,7 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
             holder.lblTitleText = (TextView) view.findViewById(R.id.lblTitle);
             holder.lblGame = (TextView) view.findViewById(R.id.lblGame);
             holder.lblUser = (TextView) view.findViewById(R.id.lblUser);
+            holder.lblNew = (TextView) view.findViewById(R.id.lblNew);
             holder.lblViewers = (TextView) view.findViewById(R.id.lblViewers);
             holder.channelThumbnailImage = (ImageView) view.findViewById(R.id.imgChannelThumbnail);
             holder.contentTypeImage = (ImageView) view.findViewById(R.id.imgContentType);
@@ -54,6 +55,12 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
         holder.lblGame.setText(stream.getMeta_game());
         holder.lblUser.setText(stream.getChannel().getLogin());
         holder.lblViewers.setText(stream.getStream_count().toString() + " Viewers");
+
+        if (stream.isNew) {
+            holder.lblNew.setVisibility(View.VISIBLE);
+        } else {
+            holder.lblNew.setVisibility(View.GONE);
+        }
 
         // Load the screen cap image on a background thread
         Picasso.with(getContext())
@@ -96,5 +103,7 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
         public TextView lblUser;
 
         public TextView lblViewers;
+
+        public TextView lblNew;
     }
 }

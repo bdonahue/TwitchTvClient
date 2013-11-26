@@ -28,6 +28,7 @@ public class JustinTvStreamData {
 	private String video_codec;
 	private Number video_height;
 	private Number video_width;
+    public boolean isNew;
 
 	public boolean getAbuse_reported() {
 		return this.abuse_reported;

@@ -19,6 +19,7 @@ import com.wdonahue.rapidparsing.utils.Web;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends Activity {
@@ -29,6 +30,8 @@ public class MainActivity extends Activity {
 
     private static final int ITEMS_PER_PAGE = 50;
 
+    private static final int MS_IN_FOUR_HOURS = 14400000;
+
     private JustinTvStreamAdapter mAdapter;
 
     private ProgressBar mProgressBar;
@@ -37,6 +40,7 @@ public class MainActivity extends Activity {
 
     private static class ActivityState {
         private int nextPage = 0;
+
         private List<JustinTvStreamData> streamData = new ArrayList<JustinTvStreamData>();
     }
 
@@ -139,8 +143,19 @@ public class MainActivity extends Activity {
                     super.onPostExecute(streams);
 
                     if (streams != null) {
-                        // Add the found streams to our array to render
-                        mState.streamData.addAll(streams);
+                        long currentTime = System.currentTimeMillis();
+
+                        for (JustinTvStreamData stream : streams) {
+                            Date uptime = new Date(stream.getUp_time());
+                            long uptimeMs = uptime.getTime();
+
+                            if (currentTime - uptimeMs < MS_IN_FOUR_HOURS) {
+                                stream.isNew = true;
+                            }
+
+                            // Add the found streams to our array to render
+                            mState.streamData.addAll(streams);
+                        }
 
                         // Tell the adapter that it needs to rerender
                         mAdapter.notifyDataSetChanged();

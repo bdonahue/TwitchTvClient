@@ -4,5 +4,6 @@
     <string name="app_name">Rapid Parsing</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="newtext">New</string>
 
 </resources>

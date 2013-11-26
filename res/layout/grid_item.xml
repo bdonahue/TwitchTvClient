@@ -42,13 +42,31 @@
                 android:textColor="@android:color/white"
                 android:textSize="12sp" />
 
-            <TextView
-                android:maxLines="1"
-                android:id="@+id/lblViewers"
+            <LinearLayout
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:maxLines="1"
+                    android:id="@+id/lblViewers"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:gravity="right"
+                    android:id="@+id/lblNew"
+                    android:visibility="gone"
+                    android:paddingRight="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:textColor="#F00"
+                    android:textSize="12sp"
+                    android:text="@string/newtext" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
