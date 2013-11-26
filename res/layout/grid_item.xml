@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:background="#90000000">
+        android:background="@drawable/backdrop">
 
         <ImageView
             android:id="@+id/imgChannelThumbnail"
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="#90000000"
+        android:background="@drawable/backdrop"
         android:gravity="center"
         android:lines="2"
         android:maxLines="2"

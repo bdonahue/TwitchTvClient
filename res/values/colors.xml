@@ -1,5 +1,7 @@
 <resources>
 
     <drawable name="white">#fff</drawable>
-    
+    <drawable name="backdrop">#90000000</drawable>
+    <drawable name="transparent">#00000000</drawable>
+
 </resources>

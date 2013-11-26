@@ -61,7 +61,7 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
 
         Picasso.with(getContext())
                 .load(stream.getChannel().getImage_url_medium())
-                .placeholder(R.drawable.white)
+                .placeholder(R.drawable.transparent)
                 .into(holder.channelThumbnailImage);
 
         return view;
