@@ -51,8 +51,8 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
         // Populate the item contents
         holder.lblTitleText.setText(stream.getTitle());
         holder.lblGame.setText(stream.getMeta_game());
-        holder.lblUser.setText(stream.getName());
-        holder.lblViewers.setText(stream.getStream_count().toString());
+        holder.lblUser.setText(stream.getChannel().getLogin());
+        holder.lblViewers.setText(stream.getStream_count().toString() + " Viewers");
 
         Picasso.with(getContext())
                 .load(stream.getChannel().getScreen_cap_url_large())
@@ -60,7 +60,7 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
                 .into(holder.screenCapThumbnailImage);
 
         Picasso.with(getContext())
-                .load(stream.getChannel().getImage_url_large())
+                .load(stream.getChannel().getImage_url_medium())
                 .placeholder(R.drawable.white)
                 .into(holder.channelThumbnailImage);
 

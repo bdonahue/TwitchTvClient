@@ -1,10 +1,13 @@
 package com.wdonahue.rapidparsing;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 
@@ -56,6 +59,15 @@ public class MainActivity extends Activity {
         gridView.setOnScrollListener(mScrollListener);
         mAdapter = new JustinTvStreamAdapter(this, 0, mState.streamData);
         gridView.setAdapter(mAdapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String title = mState.streamData.get(position).getChannel().getTitle();
+
+                Intent viewVideoIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.twitch.tv/" + title));
+                startActivity(viewVideoIntent);
+            }
+        });
     }
 
     @Override

@@ -11,7 +11,8 @@
         android:numColumns="auto_fit"
         android:horizontalSpacing="5dp"
         android:verticalSpacing="5dp"
-        android:stretchMode="columnWidth" />
+        android:stretchMode="columnWidth"
+        android:drawSelectorOnTop="true" />
 
     <ProgressBar
         android:visibility="gone"
