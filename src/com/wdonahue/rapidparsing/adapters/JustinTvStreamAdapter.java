@@ -64,7 +64,7 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
 
         // Load the screen cap image on a background thread
         Picasso.with(getContext())
-                .load(stream.getChannel().getScreen_cap_url_large())
+                .load(stream.getChannel().getScreen_cap_url_medium())
                 .placeholder(R.drawable.white)
                 .into(holder.screenCapThumbnailImage);
 

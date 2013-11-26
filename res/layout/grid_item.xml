@@ -8,69 +8,65 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:background="@drawable/backdrop">
 
         <ImageView
+            android:layout_alignParentLeft="true"
             android:id="@+id/imgChannelThumbnail"
             android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:layout_centerVertical="true" />
 
-        <LinearLayout
-            android:layout_gravity="center_vertical"
-            android:orientation="vertical"
+        <TextView
+            android:layout_toRightOf="@+id/imgChannelThumbnail"
+            android:maxLines="1"
+            android:id="@+id/lblGame"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:paddingLeft="5dp" />
+
+        <TextView
+            android:layout_toRightOf="@+id/imgChannelThumbnail"
+            android:layout_below="@+id/lblGame"
+            android:maxLines="1"
+            android:id="@+id/lblUser"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:paddingLeft="5dp" />
+
+        <TextView
+            android:paddingLeft="5dp"
+            android:layout_below="@+id/lblUser"
+            android:layout_toRightOf="@+id/imgChannelThumbnail"
+            android:maxLines="1"
+            android:id="@+id/lblViewers"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_below="@+id/lblUser"
+            android:layout_toRightOf="@+id/lblViewers"
+            android:gravity="right"
+            android:id="@+id/lblNew"
+            android:visibility="gone"
+            android:paddingRight="5dp"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:paddingLeft="5dp">
+            android:textColor="#F00"
+            android:textSize="12sp"
+            android:text="@string/newtext" />
 
-            <TextView
-                android:maxLines="1"
-                android:id="@+id/lblGame"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
-
-            <TextView
-                android:maxLines="1"
-                android:id="@+id/lblUser"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
-
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:maxLines="1"
-                    android:id="@+id/lblViewers"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:gravity="right"
-                    android:id="@+id/lblNew"
-                    android:visibility="gone"
-                    android:paddingRight="5dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:textColor="#F00"
-                    android:textSize="12sp"
-                    android:text="@string/newtext" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_gravity="bottom"
