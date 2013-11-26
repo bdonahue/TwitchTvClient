@@ -38,6 +38,7 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
             holder.lblUser = (TextView) view.findViewById(R.id.lblUser);
             holder.lblViewers = (TextView) view.findViewById(R.id.lblViewers);
             holder.channelThumbnailImage = (ImageView) view.findViewById(R.id.imgChannelThumbnail);
+            holder.contentTypeImage = (ImageView) view.findViewById(R.id.imgContentType);
 
             view.setTag(holder);
         } else {
@@ -54,15 +55,28 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
         holder.lblUser.setText(stream.getChannel().getLogin());
         holder.lblViewers.setText(stream.getStream_count().toString() + " Viewers");
 
+        // Load the screen cap image on a background thread
         Picasso.with(getContext())
                 .load(stream.getChannel().getScreen_cap_url_large())
                 .placeholder(R.drawable.white)
                 .into(holder.screenCapThumbnailImage);
 
+        // Load the channel thumbnail image on a background thread
         Picasso.with(getContext())
                 .load(stream.getChannel().getImage_url_medium())
                 .placeholder(R.drawable.transparent)
                 .into(holder.channelThumbnailImage);
+
+        // If gaming content then show the controller graphic
+        if (stream.getChannel().getCategory().contains("gaming")) {
+            // Load the channel type image on a background thread
+            Picasso.with(getContext())
+                    .load(R.drawable.ic_action_gamepad)
+                    .placeholder(R.drawable.transparent)
+                    .into(holder.contentTypeImage);
+        } else {
+            holder.contentTypeImage.setImageDrawable(null);
+        }
 
         return view;
     }
@@ -72,6 +86,8 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
         public ImageView screenCapThumbnailImage;
 
         public ImageView channelThumbnailImage;
+
+        public ImageView contentTypeImage;
 
         public TextView lblTitleText;
 
