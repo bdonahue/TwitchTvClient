@@ -12,6 +12,7 @@
         android:stretchMode="columnWidth" />
 
     <ProgressBar
+        android:visibility="gone"
         android:layout_gravity="center"
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
