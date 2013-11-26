@@ -154,7 +154,7 @@ public class MainActivity extends Activity {
                             }
 
                             // Add the found streams to our array to render
-                            mState.streamData.addAll(streams);
+                            mState.streamData.add(stream);
                         }
 
                         // Tell the adapter that it needs to rerender
