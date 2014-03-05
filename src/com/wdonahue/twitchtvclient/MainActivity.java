@@ -1,9 +1,8 @@
-package com.wdonahue.rapidparsing;
+package com.wdonahue.twitchtvclient;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
@@ -11,16 +10,17 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.wdonahue.rapidparsing.adapters.JustinTvStreamAdapter;
-import com.wdonahue.rapidparsing.model.JustinTvStreamData;
-import com.wdonahue.rapidparsing.utils.Web;
+import com.wdonahue.twitchtvclient.adapters.JustinTvStreamAdapter;
+import com.wdonahue.twitchtvclient.api.ApiClient;
+import com.wdonahue.twitchtvclient.model.JustinTvStreamData;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class MainActivity extends Activity {
     /**
@@ -114,38 +114,13 @@ public class MainActivity extends Activity {
 
             mProgressBar.setVisibility(View.VISIBLE);
 
-            // Kick off the download using an AsyncTask
-            (new AsyncTask<Void, Void, List<JustinTvStreamData>>() {
+            ApiClient.getTwitchTvApiClient().getStreams(100, pageNumber * ITEMS_PER_PAGE, new Callback<List<JustinTvStreamData>>() {
                 @Override
-                protected List<JustinTvStreamData> doInBackground(Void... params) {
-                    Gson gson = new Gson();
-
-                    // Download the web site contents into a string
-                    String json = Web.getWebsite("http://api.justin.tv/api/stream/list.json?limit=100&offset=" + Integer.toString(pageNumber * ITEMS_PER_PAGE));
-
-                    // Strip off the leading and trailing [] GSON does not like that
-                    // data = data.substring(1, data.length() - 1);
-
-                    // Parse the web site contents into our response object
-                    // return gson.fromJson(data, JustinTvStreams.class);
-
-                    // See https://sites.google.com/site/gson/gson-user-guide#TOC-Array-Examples for howto
-                    // This is extra hoekey because the root of this JSON is an array
-                    // If the root of the JSON was an object we could just do
-                    // something like return gson.fromJson(data, JustinTvStreams.class);
-                    Type collectionType = new TypeToken<List<JustinTvStreamData>>() {
-                    }.getType();
-                    return gson.fromJson(json, collectionType);
-                }
-
-                @Override
-                protected void onPostExecute(List<JustinTvStreamData> streams) {
-                    super.onPostExecute(streams);
-
-                    if (streams != null) {
+                public void success(List<JustinTvStreamData> justinTvStreamData, Response response) {
+                    if (justinTvStreamData != null) {
                         long currentTime = System.currentTimeMillis();
 
-                        for (JustinTvStreamData stream : streams) {
+                        for (JustinTvStreamData stream : justinTvStreamData) {
                             Date uptime = new Date(stream.getUp_time());
                             long uptimeMs = uptime.getTime();
 
@@ -168,7 +143,13 @@ public class MainActivity extends Activity {
 
                     mIsDownloadInProgress = false;
                 }
-            }).execute();
+
+                @Override
+                public void failure(RetrofitError retrofitError) {
+                    // Probably ought to show a user facing error of some sort here
+                    mIsDownloadInProgress = false;
+                }
+            });
         }
     }
 }

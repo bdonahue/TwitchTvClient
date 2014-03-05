@@ -1,4 +1,4 @@
-package com.wdonahue.rapidparsing.views;
+package com.wdonahue.twitchtvclient.views;
 
 import android.content.Context;
 import android.util.AttributeSet;

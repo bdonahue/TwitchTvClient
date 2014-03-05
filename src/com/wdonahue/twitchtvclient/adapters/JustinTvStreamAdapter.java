@@ -1,4 +1,4 @@
-package com.wdonahue.rapidparsing.adapters;
+package com.wdonahue.twitchtvclient.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.wdonahue.rapidparsing.R;
-import com.wdonahue.rapidparsing.model.JustinTvStreamData;
+import com.wdonahue.twitchtvclient.R;
+import com.wdonahue.twitchtvclient.model.JustinTvStreamData;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.wdonahue.rapidparsing.model;
+package com.wdonahue.twitchtvclient.model;
 
 public class JustinTvStreamData {
 	private boolean abuse_reported;
