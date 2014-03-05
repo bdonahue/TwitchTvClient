@@ -7,7 +7,7 @@ import java.util.List;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.http.GET;
-import retrofit.http.Path;
+import retrofit.http.Query;
 
 public class ApiClient {
     private static TwitchTvApiInterface sTwitchTvService;
@@ -25,7 +25,7 @@ public class ApiClient {
     }
 
     public interface TwitchTvApiInterface {
-        @GET("/stream/list.json?limit={limit}&offset={offset}")
-        void getStreams(@Path("limit") int limit, @Path("offset") int offset, Callback<List<JustinTvStreamData>> callback);
+        @GET("/stream/list.json")
+        void getStreams(@Query("limit") int limit, @Query("offset") int offset, Callback<List<JustinTvStreamData>> callback);
     }
 }
