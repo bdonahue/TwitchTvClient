@@ -15,7 +15,6 @@ import com.wdonahue.twitchtvclient.api.ApiClient;
 import com.wdonahue.twitchtvclient.model.JustinTvStreamData;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import retrofit.Callback;
@@ -29,8 +28,6 @@ public class MainActivity extends Activity {
     private static final int RUNNING_LOW_ON_DATA_THRESHOLD = 10;
 
     private static final int ITEMS_PER_PAGE = 50;
-
-    private static final int MS_IN_FOUR_HOURS = 14400000;
 
     private JustinTvStreamAdapter mAdapter;
 
@@ -90,6 +87,44 @@ public class MainActivity extends Activity {
         return mState;
     }
 
+    private void downloadData(final int pageNumber) {
+        if (!mIsDownloadInProgress) {
+            mIsDownloadInProgress = true;
+
+            mProgressBar.setVisibility(View.VISIBLE);
+
+            ApiClient.getTwitchTvApiClient().getStreams(ITEMS_PER_PAGE, pageNumber * ITEMS_PER_PAGE, new Callback<List<JustinTvStreamData>>() {
+                @Override
+                public void success(List<JustinTvStreamData> justinTvStreamData, Response response) {
+                    consumeApiData(justinTvStreamData);
+                }
+
+                @Override
+                public void failure(RetrofitError retrofitError) {
+                    consumeApiData(null);
+                }
+            });
+        }
+    }
+
+    private void consumeApiData(List<JustinTvStreamData> justinTvStreamData) {
+        if (justinTvStreamData != null) {
+            // Add the found streams to our array to render
+            mState.streamData.addAll(justinTvStreamData);
+
+            // Tell the adapter that it needs to rerender
+            mAdapter.notifyDataSetChanged();
+
+            // Done loading; remove loading indicator
+            mProgressBar.setVisibility(View.GONE);
+
+            // Keep track of what page to download next
+            mState.nextPage++;
+        }
+
+        mIsDownloadInProgress = false;
+    }
+
     /**
      * Scroll-handler for the ListView which can auto-load the next page of data.
      */
@@ -107,49 +142,4 @@ public class MainActivity extends Activity {
             }
         }
     };
-
-    private void downloadData(final int pageNumber) {
-        if (!mIsDownloadInProgress) {
-            mIsDownloadInProgress = true;
-
-            mProgressBar.setVisibility(View.VISIBLE);
-
-            ApiClient.getTwitchTvApiClient().getStreams(100, pageNumber * ITEMS_PER_PAGE, new Callback<List<JustinTvStreamData>>() {
-                @Override
-                public void success(List<JustinTvStreamData> justinTvStreamData, Response response) {
-                    if (justinTvStreamData != null) {
-                        long currentTime = System.currentTimeMillis();
-
-                        for (JustinTvStreamData stream : justinTvStreamData) {
-                            Date uptime = new Date(stream.getUp_time());
-                            long uptimeMs = uptime.getTime();
-
-                            if (currentTime - uptimeMs < MS_IN_FOUR_HOURS) {
-                                stream.isNew = true;
-                            }
-
-                            // Add the found streams to our array to render
-                            mState.streamData.add(stream);
-                        }
-
-                        // Tell the adapter that it needs to rerender
-                        mAdapter.notifyDataSetChanged();
-
-                        // Done loading; remove loading indicator
-                        mProgressBar.setVisibility(View.GONE);
-
-                        mState.nextPage++;
-                    }
-
-                    mIsDownloadInProgress = false;
-                }
-
-                @Override
-                public void failure(RetrofitError retrofitError) {
-                    // Probably ought to show a user facing error of some sort here
-                    mIsDownloadInProgress = false;
-                }
-            });
-        }
-    }
 }

@@ -4,4 +4,10 @@
     <string name="app_name">Twitch.Tv Client</string>
     <string name="newtext">New</string>
 
+    <plurals name="viewers">
+        <item quantity="zero">%d Viewers</item>
+        <item quantity="one">%d Viewer</item>
+        <item quantity="other">%d Viewers</item>
+    </plurals>
+
 </resources>
