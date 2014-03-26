@@ -1,4 +1,4 @@
-AndroidRapidGsonParsing
+TwitchTvClient
 =======================
 
-Tech demo for how to use GSON to rapidly parse JSON data for Android
+Tech demo for how to use a OkHttp, Retrofit, GSON stack to download and parse API data.
