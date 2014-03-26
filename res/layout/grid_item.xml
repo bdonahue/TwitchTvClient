@@ -14,15 +14,9 @@
         android:orientation="horizontal"
         android:background="@drawable/backdrop">
 
-        <ImageView
-            android:layout_alignParentLeft="true"
-            android:id="@+id/imgChannelThumbnail"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true" />
 
         <TextView
-            android:layout_toRightOf="@+id/imgChannelThumbnail"
+            android:layout_alignParentLeft="true"
             android:maxLines="1"
             android:id="@+id/lblGame"
             android:layout_height="wrap_content"

@@ -37,7 +37,6 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
             holder.lblGame = (TextView) view.findViewById(R.id.lblGame);
             holder.lblUser = (TextView) view.findViewById(R.id.lblUser);
             holder.lblViewers = (TextView) view.findViewById(R.id.lblViewers);
-            holder.channelThumbnailImage = (ImageView) view.findViewById(R.id.imgChannelThumbnail);
 
             view.setTag(holder);
         } else {
@@ -61,20 +60,12 @@ public class JustinTvStreamAdapter extends ArrayAdapter<JustinTvStreamData> {
                 .placeholder(R.drawable.white)
                 .into(holder.screenCapThumbnailImage);
 
-        // Load the channel thumbnail image on a background thread
-        Picasso.with(getContext())
-                .load(stream.getChannel().getImage_url_medium())
-                .placeholder(R.drawable.transparent)
-                .into(holder.channelThumbnailImage);
-
         return view;
     }
 
     // Holder class used to efficiently recycle view positions
     private static final class Holder {
         public ImageView screenCapThumbnailImage;
-
-        public ImageView channelThumbnailImage;
 
         public TextView lblTitleText;
 
