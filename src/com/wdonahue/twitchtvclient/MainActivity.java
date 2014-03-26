@@ -93,17 +93,7 @@ public class MainActivity extends Activity {
 
             mProgressBar.setVisibility(View.VISIBLE);
 
-            ApiClient.getTwitchTvApiClient().getStreams(ITEMS_PER_PAGE, pageNumber * ITEMS_PER_PAGE, new Callback<List<JustinTvStreamData>>() {
-                @Override
-                public void success(List<JustinTvStreamData> justinTvStreamData, Response response) {
-                    consumeApiData(justinTvStreamData);
-                }
-
-                @Override
-                public void failure(RetrofitError retrofitError) {
-                    consumeApiData(null);
-                }
-            });
+            // TODO Download from the API here
         }
     }
 
